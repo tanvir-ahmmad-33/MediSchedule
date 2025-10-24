@@ -11,6 +11,8 @@
     --dark-charcoal: #333;
     --keppel: #4aa7a1;
     --bright-gray: #e6f3ef;
+    --japanese-indigo: #303a47;
+    --medium-sea-green: #48a36c;
 }
 
 body {
@@ -223,8 +225,46 @@ body {
     margin-top: auto;
 }
 
-/* ********************** staffs section ********************** */
+/* ***************** check appointment section **************** */
+#check-appointment {
+    min-height: 320px;
+    background-color: var(--medium-sea-green);
+}
 
+#check-appointment-form .form-content {
+    margin: 1.5rem 0;
+}
+
+#check-appointment-form .form-group {
+    border-radius: 5px;
+}
+
+#check-appointment-form .input-group-text {
+    border: 1px solid var(--bright-gray);
+}
+
+#check-appointment-form .input-group-text i {
+    font-size: 1.2rem;
+}
+
+#check-appointment-form input {
+    border: 0px;
+}
+
+.check-appointment-btn {
+    background-color: var(--dark-charcoal);
+    color: var(--alice-blue);
+    border: 1px solid var(--dark-charcoal);
+}
+
+.check-appointment-btn:hover {
+    background-color: var(--bright-gray);
+    color: var(--dark-charcoal);
+    font-weight: 500;
+    border: 1px solid var(--dark-charcoal);
+}
+
+/* ********************** staffs section ********************** */
 #staffs {
     min-height: 100vh;
 }
@@ -296,6 +336,7 @@ body {
 
 #contact {
     min-height: 100vh;
+    background-color: var(--japanese-indigo);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

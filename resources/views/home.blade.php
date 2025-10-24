@@ -276,6 +276,28 @@
         </div>
     </section>
 
+    <!-- check appointment section -->
+    <section id="check-appointment" class="check-appointment section-padding">
+        <div class="container">
+            <h2 class="text-center text-white">Check Your Appointment Progress</h2>
+            <form action="#" method="POST" id="check-appointment-form">
+                @csrf
+
+                <div class="d-flex flex-column flex-lg-row justify-content-lg-center gap-2 form-content">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-id-card"></i>
+                            </span>
+                            <input type="text" name="name" id="name" class="form-control" value="" placeholder="Enter you appointment ID" aria-label="Appointment ID">
+                        </div>
+                    </div>
+                    <button class="btn check-appointment-btn">Check Appointment</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
     <!-- staffs section -->
     <section id="staffs" class="staffs section-padding">
         <div class="container">
@@ -357,7 +379,8 @@
     </section>
 
     <!-- footer/contact section -->
-    <footer id="contact" class="contact section-padding"></footer>
+    <footer id="contact" class="contact section-padding">    
+    </footer>
     
 
     <!-- JQuery CDN -->
