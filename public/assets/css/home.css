@@ -13,6 +13,7 @@
     --bright-gray: #e6f3ef;
     --japanese-indigo: #303a47;
     --medium-sea-green: #48a36c;
+    --rusty-red: #dc3545;
 }
 
 body {
@@ -334,9 +335,193 @@ body {
 
 /* ********************** footer section ********************** */
 
+.contact-section-padding {
+    padding-top: 90px;
+}
+
 #contact {
     min-height: 100vh;
     background-color: var(--japanese-indigo);
+    color: var(--bright-gray);
+}
+
+#contact h5 {
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 7px;
+}
+
+#contact h5::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 75px;
+    height: 2px;
+    background-color: #ffffff;
+}
+
+#contact .contact-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+#contact .doctor .doctor-position {
+    background-color: var(--dark-charcoal);
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 0.9rem;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    margin: 15px 0;
+}
+
+#contact .doctor .doctor-degree {
+    font-size: 0.75rem;
+}
+
+#contact .social-link .links {
+    gap: 10px;
+}
+
+#contact .social-link .links a {
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--japanese-indigo);
+    border-radius: 25%;
+    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+#contact .social-link .links a:hover {
+    background-color: var(--medium-sea-green);
+    box-shadow: 5px 5px 20px rgba(0, 255, 0, 0.3);
+    transform: scale(1.1);
+}
+
+#contact .social-link .links a i {
+    font-size: 1.3rem;
+    color: var(--alice-blue);
+}
+
+#contact .newsletter p {
+    margin: 5px 0px 10px 0px;
+}
+
+#contact .newsletter .btn-newsletter {
+    display: inline-block;
+    white-space: nowrap;
+    background-color: var(--alice-blue);
+    color: var(--japanese-indigo);
+    transition: background-color 0.3s;
+}
+
+#contact .newsletter .btn-newsletter:hover {
+    background-color: var(--medium-sea-green);
+    color: var(--white);
+}
+
+#contact .contact-middle .contact-info {
+    list-style: none;
+    padding-left: 0;
+}
+
+#contact .contact-middle .contact-info li {
+    display: flex;
+}
+
+#contact .contact-middle .contact-info li i {
+    padding: 3px 8px 0px 0px;
+    font-size: 18px;
+}
+
+#contact .contact-middle .contact-info li div h6 {
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+}
+
+#contact .contact-middle .contact-info li div p {
+    font-size: 0.75rem;
+}
+
+#contact .contact-middle .emergency-info {
+    border-left: 6px solid var(--rusty-red);
+    padding: 10px;
+    border-radius: 15px;
+    background: linear-gradient(
+        to right,
+        var(--alice-blue),
+        var(--japanese-indigo)
+    );
+    color: var(--black);
+}
+
+#contact .contact-right .table {
+    background-color: transparent !important;
+}
+
+#contact .contact-middle .emergency-info p {
+    font-size: 0.85rem;
+}
+
+#contact .contact-middle .emergency-info .emergency-text {
+    letter-spacing: -0.5px;
+}
+
+#contact .contact-right .appointment-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#contact .contact-right .appointment-table tr:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#contact .contact-right .appointment-table tr:last-child {
+    color: var(--rusty-red);
+}
+
+#contact .contact-right .appointment-table td {
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+#contact .contact-right .appointment-table td:first-child {
+    font-weight: 500;
+}
+
+#contact .contact-right .appointment-table td:nth-child(2) {
+    text-align: center;
+}
+
+#contact .contact-right .appointment-table td:last-child {
+    text-align: right;
+}
+
+#contact .contact-right .holiday-hours {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+}
+
+#contact .contact-right .free-camp-info {
+    background-color: var(--keppel);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+#contact .contact-right .free-camp-info h6 {
+    color: var(--medium-jungle-green);
+}
+
+#contact .contact-right .free-camp-info p {
+    font-size: 0.75rem;
+    color: var(--japanese-indigo);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

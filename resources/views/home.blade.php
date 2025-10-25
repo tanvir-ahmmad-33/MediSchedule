@@ -379,7 +379,178 @@
     </section>
 
     <!-- footer/contact section -->
-    <footer id="contact" class="contact section-padding">    
+    <footer id="contact" class="contact contact-section-padding">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12 col-lg-4 contact-left pe-lg-3">
+                    <div class="doctor">
+                        <h3 class="doctor-name">Dr. Usman Khawaja</h3>
+
+                        <p class="doctor-position">
+                            <strong>Consultant Ophthalmologist</strong> <br>
+                            Department of Ophthalmology <br>
+                            Rajshahi Medical College & Hospital, Bangladesh
+                        </p>
+
+                        <p class="doctor-degree">
+                            MBBS (Sher-e-Bangla Medical College, Barisal) <br>
+                            MPH (Masters of Public Health, The Johns Hopkins University, USA) <br>
+                            Diploma in Ophthalmology (National Institute of Ophthalmology) <br>
+                            Clinical Retina Vitreous Fellow (University of British Columbia, Canada)
+                        </p>
+                    </div>
+
+                    <div class="social-link">
+                        <h5 class="social-link-title">Stay Connected for More</h5>
+                        <div class="links d-flex flex-row">
+                            <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" title="Instragram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" title="Linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="#" title="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="#" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="newsletter">
+                        <h5 class="mb-0">Health Newsletter</h5>
+                        <p>Subscribe for health tips and practice updates.</p>
+                        <form action="" method="" id="">
+                            <div class="d-flex flex-lg-row gap-2">
+                                <input type="email" class="form-control" placeholder="Your Email Address">
+                                <button type="submit" class="btn btn-sm btn-newsletter">Subscribe Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 contact-middle ps-lg-4 pe-lg-4">
+                    <div class="locations">
+                        <h5 class="clinic-name-heading">Clinic Location</h5>
+
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <h6>Rajshahi Chamber</h6>
+                                    <p>
+                                        Eye 10 Tower, Airport Road, Aam Chattar <br>
+                                        Rajshahi-6203
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <h6>Chapai Nawabganj Chamber</h6>
+                                    <p>
+                                        Station Road, Near Old Bus Stand <br>
+                                        Chapai Nawabganj-6300
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-phone"></i>
+                                <div>
+                                    <h6>Appointments</h6>
+                                    <p>
+                                        Rajshahi (Hospital): <a href="tel:+8809613123123" class="text-decoration-none text-light">+88 09613 123 123</a> <br>
+                                        Chapai Nawabganj (Chamber): <a href="tel:+8801755660041" class="text-decoration-none text-light">+88 01755 660 041</a> <br>
+                                        Emergency/Hotline: <a href="tel:+8801916629999" class="text-decoration-none text-danger bg-light rounded fw-bold ps-1 pe-1">+88 01916 629 999</a>
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                <div>
+                                    <h6>Email</h6>
+                                    <p>
+                                        Rajshahi: <a href="mailto:rajshahi@bdeyehospital.com" class="text-decoration-none text-light">rajshahi@bdeyehospital.com</a><br>
+                                        Chapai Nawabganj: <a href="mailto:cnawabganj@clinicname.com" class="text-decoration-none text-light">cnawabganj@clinicname.com</a>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="emergency-info">
+                            <h4><i class="fa-solid fa-ambulance me-1 text-danger"></i><span class="emergency-text">Emergency Contact</span></h4>
+                            <p>For medical emergencies after hours, please call:</p>
+                            <div class="emergency-phone">+88 01916 629 999</div>
+                            <p>Or go to the nearest emergency room.</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12 col-lg-4 contact-right ps-lg-4">
+                    <div class="hours">
+                        <h5>Clinic Hours</h5>
+
+                        <table class="appointment-table">
+                            <tbody>
+                                <tr>
+                                    <td>Saturday</td>
+                                    <td>6:00 AM - 9:00 PM</td>
+                                    <td>Rajshahi</td>
+                                </tr>
+                                <tr>
+                                    <td>Sunday</td>
+                                    <td>6:00 AM - 9:00 PM</td>
+                                    <td>Rajshahi</td>
+                                </tr>
+                                <tr>
+                                    <td>Monday</td>
+                                    <td>7:30 AM - 9:30 PM</td>
+                                    <td>C. Nawabgang</td>
+                                </tr>
+                                <tr>
+                                    <td>Tuesday</td>
+                                    <td>6:00 AM - 9:00 PM</td>
+                                    <td>Rajshahi</td>
+                                </tr>
+                                <tr>
+                                    <td>Wednesday</td>
+                                    <td>6:00 AM - 9:00 PM</td>
+                                    <td>Rajshahi</td>
+                                </tr>
+                                <tr>
+                                    <td>Thursday</td>
+                                    <td>7:30 AM - 9:30 PM</td>
+                                    <td>C. Nawabgang</td>
+                                </tr>
+                                <tr>
+                                    <td>Friday</td>
+                                    <td colspan="2">Closed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="holiday-hours">
+                            Please call ahead during holiday seasons as hours may vary.We're closed on major holidays.
+                        </p>
+
+                        <div class="free-camp-info">
+                            <h6 class="text-center">Free Health Camp</h6>
+                            <p>
+                                A free health camp provides no-cost medical services like check-ups and screenings for underserved communities. Check our website for updates on upcoming camps. <br>
+                                
+                            </p>
+                            <h6 class="text-center mb-0" style="font-size: 0.75rem;">
+                                <i class="fa-solid fa-phone"></i> +88 09613 123 123
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border border-1 border-light mt-4 mb-2">
+            <div class="d-flex justify-content-center">
+                <p class="footer-bottom">&copy; 2023 Dr. Usman khawaja. All Rights Reserved. | 
+                    <a href="#" class="text-decoration-none text-light">Privacy Policy</a> | 
+                    <a href="#" class="text-decoration-none text-light">Terms of Service</a>
+                </p>
+            </div>
+        </div>   
     </footer>
     
 
