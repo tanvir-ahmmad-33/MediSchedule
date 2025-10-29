@@ -74,9 +74,12 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{{ asset('assets/image/hero-img-1.jpg') }}" alt="First slide">
                 <div class="carousel-caption">
-                    <h5>
-                        <span class="p-3 rounded">Caring for Your Eyes, Every Step of the Way</span>
-                    </h5>
+                    <div class="carousel-title d-flex justify-content-center">
+                        <span>
+                            Caring for Your Eyes,
+                            Every Step of the Way
+                        </span>
+                    </div>
                     <h4>Dr.Usman Khawaja</h4>
                     <p>
                         MBBS (DMC), FCPS (BCPS), MCPS (BCPS) <br>
@@ -276,6 +279,100 @@
         </div>
     </section>
 
+    <!-- appointment section -->
+    <section id="make-appointment" class="make-appointment section-padding">
+        <div class="container">
+            <h2 class="appointment-create-title">Make An Appointment</h2>
+
+            <form action="" method="" id="appointment-create-form">
+                @csrf
+
+                <!-- name -->
+                <div class="row mb-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label text-light">First Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
+                                <input type="text" name="firstName" id="firstName" class="form-control" value="" placeholder="Enter your first name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                            <label for="lastName" class="form-label text-light">Last Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
+                                <input type="text" name="lastName" id="lastName" class="form-control" value="" placeholder="Enter your last name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- email & phone -->
+                <div class="row mb-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                            <label for="email" class="form-label text-light">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                <input type="email" name="email" id="email" class="form-control" value="" placeholder="Enter your email address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                            <label for="phone" class="form-label text-light">Phone</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                                <input type="tel" name="phone" id="phone" class="form-control" value="" placeholder="Enter your phone number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- age & gender -->
+                <div class="row mb-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                            <label for="age" class="form-label text-light">Age</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-cake-candles"></i></span>
+                                <input type="number" name="age" id="age" class="form-control" value="" placeholder="Enter your age">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                            <label for="gender" class="form-label text-light">Gender</label>
+                            <div class="d-flex">
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="radio" name="gender" id="male" checked>
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="radio" name="gender" id="female">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="others">
+                                    <label class="form-check-label" for="others">Others</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- appointment type , appointment date -->
+                
+                <!-- password -->
+                <!-- remarks -->
+
+                <button type="submit" class="btn btn-success create-appointment-btn">Make Appointment</button>
+            </form>
+        </div>
+    </section>
+
     <!-- check appointment section -->
     <section id="check-appointment" class="check-appointment section-padding">
         <div class="container">
@@ -380,7 +477,7 @@
 
     <!-- footer/contact section -->
     <footer id="contact" class="contact contact-section-padding">
-        <div class="container mt-3">
+        <div class="container mt-lg-3">
             <div class="row">
                 <div class="col-12 col-lg-4 contact-left pe-lg-3">
                     <div class="doctor">
@@ -475,7 +572,7 @@
                         <div class="emergency-info">
                             <h4><i class="fa-solid fa-ambulance me-1 text-danger"></i><span class="emergency-text">Emergency Contact</span></h4>
                             <p>For medical emergencies after hours, please call:</p>
-                            <div class="emergency-phone">+88 01916 629 999</div>
+                            <div class="emergency-phone text-danger fw-bold">+88 01916 629 999</div>
                             <p>Or go to the nearest emergency room.</p>
                             
                         </div>
@@ -559,5 +656,17 @@
 
     <!-- Bootstrap CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <script>
+        $('#appointment-create-form').on('submit', function(e) {
+            e.preventDefault();
+
+            let firstName = $('#appointment-create-form #firstName').val();
+            let lastName  = $('#appointment-create-form #lastName').val();
+
+            console.log(firstName);
+            console.log(lastName);
+        })
+    </script>
 </body>
 </html>

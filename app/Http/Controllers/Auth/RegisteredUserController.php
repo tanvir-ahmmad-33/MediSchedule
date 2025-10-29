@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -30,22 +31,31 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        $validated = $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name'  => ['required', 'string', 'max:255'],
+            'email'      => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'phone'      => ['required', 'regex:/^\+88(01[3-9]\d{8})$/', 'unique:users,phone'],
+            'role'       => ['required', 'in:patient,staff,doctor'],
+            'gender'     => ['required', 'in:male,female,other'],
+            'password'   => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name'           => $request->first_name . ' ' . $request->last_name,
+            'phone'          => $request->phone,
+            'email'          => $request->email,
+            'role'           => $request->role,
+            'gender'         => $request->gender,
+            'admin_verified' => 0,
+            'password'       => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        if($user) {
+            return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+        }  else {
+            return redirect()->route('register')->with('error', 'Registration failed. Please try again.');
+        }
     }
 }
