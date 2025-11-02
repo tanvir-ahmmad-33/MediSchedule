@@ -11,6 +11,15 @@
 
             
     <ul class="sidebar-nav">
+        <!-- Home -->
+        <li class="sidebar-item">
+            <a href="{{ route('doctor.dashboard') }}" class="sidebar-link">
+                <i class="fa-solid fa-igloo"></i>
+                <span>Home</span>
+            </a>
+        </li>
+
+        <!-- Appointment -->
         <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#appointments" aria-expanded="false" aria-controls="appointments">
                 <i class="fas fa-clipboard-list"></i>
@@ -32,13 +41,15 @@
             </ul>
         </li>
 
+        <!-- Appointment Type -->
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="{{ route('doctor.appointment-type.index') }}" class="sidebar-link">
                 <i class="fas fa-stethoscope"></i>
-                <span>Appointment Category</span>
+                <span>Appointment Type</span>
             </a>
         </li>
 
+        <!-- Appointment Schedule -->
         <li class="sidebar-item">
             <a href="#" class="sidebar-link">
                 <i class="fa-solid fa-calendar-days"></i>

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ config('app.name') }}</title>
 
     <!-- Importing font from Google Fonts -->
@@ -13,6 +15,9 @@
 
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+    <!-- Sweet Alert CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet">
@@ -27,15 +32,7 @@
 
         <div class="main">
             <nav class="navbar navbar-expand px-4 py-3">
-                <form action="#" class="d-none d-sm-inline-block">
-                    <div class="input-group input-group-navbar">
-                        <input type="text" class="form-control border-0 rounded-9 pe-0" placeholder="Search..." aria-label="Search">
-                        <button class="btn border-0 rounded-0" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-
+                {{ $title }}
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
@@ -99,8 +96,11 @@
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- Bootstrap JS CDN -->
+    <!-- Bootstrap CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Sweet Alert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.all.min.js"></script>
 
     <!-- Custom JS -->
     <script>

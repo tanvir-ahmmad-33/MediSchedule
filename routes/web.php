@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Doctor\DoctorAppointmentTypeController;
 use App\Http\Controllers\Doctor\DoctorDashboardController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Patient\PatientDashboardController;
@@ -25,7 +26,16 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
 
     Route::middleware('role:doctor')->group(function () {
+        // Dashboard
         Route::get('/doctor/dashboard', [DoctorDashboardController::class, 'index'])->name('doctor.dashboard');
+
+        // Appointment Type
+        Route::get   ('/doctor/appointment-type',           [DoctorAppointmentTypeController::class, 'index'])  ->name('doctor.appointment-type.index');
+        Route::post  ('/doctor/appointment-type',           [DoctorAppointmentTypeController::class, 'store'])  ->name('doctor.appointment-type.store');
+        Route::get   ('/doctor/appointment-type/{id}/edit', [DoctorAppointmentTypeController::class, 'edit'])   ->name('doctor.appointment-type.edit');
+        Route::put   ('/doctor/appointment-type/{id}',      [DoctorAppointmentTypeController::class, 'update']) ->name('doctor.appointment-type.update');
+        Route::delete('/doctor/appointment-type/{id}',      [DoctorAppointmentTypeController::class, 'destroy'])->name('doctor.appointment-type.destroy');
+
     });
 
     Route::middleware('role:staff')->group(function () {

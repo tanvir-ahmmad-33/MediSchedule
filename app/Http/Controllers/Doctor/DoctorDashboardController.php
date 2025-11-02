@@ -11,13 +11,19 @@ class DoctorDashboardController extends Controller
         $doctor = Auth::user();
 
         return [
-            'name' => $doctor->name,
+            'name'   => $doctor->name,
+            'email'  => $doctor->email,
+            'phone'  => $doctor->phone,
             'gender' => $doctor->gender,
         ];
     }
 
     public function index() {
         $doctor = $this->doctorInfo();
-        return view('doctor.dashboard', ['title' => 'Doctor | Dashboard', 'doctor' => $doctor]);
+
+        return view('doctor.dashboard', [
+            'title' => 'Doctor | Dashboard', 
+            'doctor' => $doctor
+        ]);
     }
 }
