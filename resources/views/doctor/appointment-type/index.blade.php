@@ -54,7 +54,7 @@
 @section('body-content')
 <div class="row mb-3">
     <div class="col-12 col-md-12 col-lg-6 d-flex justify-content-center gap-2 justify-content-lg-start">
-        <form action="" method="POST" id="appt-type-search-form">
+        <form action="" method="GET" id="appt-type-search-form">
             <div class="d-flex flex-row gap-2">
                 <div class="input-group ">
                     <span class="input-group-text border border-secondary-emphasis"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -195,12 +195,12 @@
                 $('#appointment-type-table tbody').html(response.tableContent);
                 $('#pagination-section').html(response.pagination);
             },
-            error() {
+            error(xhr, status, error) {
                 Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Failed to reload the table.',
-            });
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Failed to reload the table.',
+                });
             }
         });
     }

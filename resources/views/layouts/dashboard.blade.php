@@ -59,7 +59,7 @@
                 </div>
             </nav>
 
-            <main class="content px-3 pt-3 pb-0">
+            <main class="content">
                 <div class="container-fluid">
                     @yield('body-content')
                 </div>
@@ -103,6 +103,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.all.min.js"></script>
 
     <!-- Custom JS -->
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script>
         $(".toggle-btn").on("click", function() {
             $("#sidebar").toggleClass("expand");

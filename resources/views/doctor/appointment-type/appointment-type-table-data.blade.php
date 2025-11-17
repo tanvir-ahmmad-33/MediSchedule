@@ -9,13 +9,13 @@
                     <i class="fas fa-edit"></i> Edit
                 </button>
                 <button class="btn btn-xs btn-danger delete-btn d-flex flex-row align-items-center gap-1" data-id="{{ $appointmentType['id'] }}" data-name="{{ $appointmentType['appt_type_name'] }}">
-                    <i class="fas fa-trash-alt"></i> Delete
+                    <i class="fa-solid fa-trash-can"></i> Delete
                 </button>
             </td>
         </tr>
     @endforeach
 @else
     <tr>
-        <td colspan="4" class="text-muted text-center"></td>
+        <td colspan="4" class="text-center text-small text-danger">No appointment type is found.</td>
     </tr>
 @endif

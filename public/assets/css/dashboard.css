@@ -36,8 +36,8 @@ body {
 }
 
 #sidebar.expand {
-    width: 290px;
-    min-width: 290px;
+    width: 325px;
+    min-width: 325px;
 }
 
 #sidebar:not(.expand) .sidebar-logo,
