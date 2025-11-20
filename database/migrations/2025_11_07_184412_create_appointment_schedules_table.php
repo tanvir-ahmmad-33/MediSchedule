@@ -20,6 +20,7 @@ return new class extends Migration
             $table->time('opening_time');
             $table->time('closing_time');
             $table->unsignedSmallInteger('patient_capacity');
+            $table->boolean('ot_status')->default(false);
             $table->timestamps();
         });
     }

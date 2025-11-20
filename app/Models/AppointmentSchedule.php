@@ -16,9 +16,41 @@ class AppointmentSchedule extends Model
         'opening_time',
         'closing_time',
         'patient_capacity',
+        'ot_status'
     ];
 
     public function clinic() {
         return $this->belongsTo(Clinic::class);
+    }
+
+    public function scopeWhereTimeOverlap($query, $date, $startTime, $endTime) {
+        return $query->whereDate('appointment_date', $date)
+                     ->where('opening_time', '<', $endTime)
+                     ->where('closing_time', '>', $startTime);
+    }
+
+    public function scopeSearch($query, $searchValue, $searchField) {
+        switch($searchField) {
+            case 'name':
+                return $query->whereHas('clinic', function($query) use ($searchValue) {
+                    $query->where('name', 'like', '%' . $searchValue . '%');
+                });
+            case 'city':
+                return $query->whereHas('clinic', function($query) use ($searchValue) {
+                    $query->where('city', 'like', '%' . $searchValue . '%');
+                });
+            case 'address':
+                return $query->whereHas('clinic', function($query) use ($searchValue) {
+                    $query->where('address', 'like', '%' . $searchValue . '%');
+                });
+            case 'weekday':
+                return $query->whereRaw('DAYOFWEEK(appointment_date) = ?', [intval($searchValue)]);
+            case 'ot_status':
+                return $query->where('ot_status', '=', $searchValue);
+            default:
+                return $query;
+        }
+
+        return $query;
     }
 }

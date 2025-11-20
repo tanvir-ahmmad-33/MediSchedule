@@ -51,17 +51,25 @@
 
         <!-- Appointment Schedule -->
         <li class="sidebar-item">
-            <a href="{{ route('doctor.appointment-schedule.index') }}" class="sidebar-link">
+            <a href="{{ route('doctor.appointment-schedule.index') }}" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#schedules" aria-expanded="false" aria-controls="clinics">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span>Consultation Schedule</span>
             </a>
+            <ul id="schedules" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="{{ route('doctor.appointment-schedule.index') }}" class="sidebar-link">Schedules</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('doctor.appointment-schedule.create') }}" class="sidebar-link">Add New Schedule</a>
+                </li>
+            </ul>
         </li>
 
         <!-- Clinic -->
         <li class="sidebar-item">
             <a href="{{ route('doctor.clinic.index') }}" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#clinics" aria-expanded="false" aria-controls="clinics">
                 <i class="fa-solid fa-hospital"></i>
-                <span>Clinic</span>
+                <span>Healthcare Facility</span>
             </a>
             <ul id="clinics" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">

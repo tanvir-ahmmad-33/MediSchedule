@@ -8,6 +8,12 @@ class AppointmentTypeService {
         return AppointmentType::search($search)->paginate($perPage);
     }
 
+    public function appointmentTypeExistenceCheck($data) {
+        return AppointmentType::where('appt_type_code', $data['abbreviation'])
+                                ->orWhere('appt_type_name', $data['appointmentType'])
+                                ->first();
+    }
+
     public function createAppointmentType($data) {
         $createAppointmentTypeData = [
             'appt_type_code' => $data['abbreviation'],

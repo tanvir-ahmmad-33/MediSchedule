@@ -49,18 +49,30 @@ class DoctorAppointmentTypeController extends Controller
     public function store(AppointmentTypeRequest $request) {
         $validatedData = $request->getAppointmentType();
 
-        $appointmentType = $this->appointmentTypeService->createAppointmentType($validatedData);
+        $duplicate = $this->appointmentTypeService->appointmentTypeExistenceCheck($validatedData);
 
-        if($appointmentType) {
+        if($duplicate) {
             $response = [
+                'exists' => true,
                 'status'  => true,
-                'message' => 'Appointment type created successfully!'
+                'message' => 'Appointment type already exists.'
             ];
         } else {
-            $response = [
-                'status'  => false,
-                'message' => 'Failed to create appointment type. Please try again.'
-            ];
+            $appointmentType = $this->appointmentTypeService->createAppointmentType($validatedData);
+
+            if($appointmentType) {
+                $response = [
+                    'exists'  => false,
+                    'status'  => true,
+                    'message' => 'Appointment type created successfully!'
+                ];
+            } else {
+                $response = [
+                    'exists'  => false,
+                    'status'  => false,
+                    'message' => 'Failed to create appointment type. Please try again.'
+                ];
+            }
         }
 
         return response()->json($response);

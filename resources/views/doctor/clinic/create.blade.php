@@ -31,7 +31,7 @@
 
 @section('body-content')
 <div class="container">
-    <h2 class="text-center mt-3 mb-0">Create Clinic Information Profile</h2>
+    <h2 class="text-center mt-3 mb-0">Create A Healthcare Facility Profile</h2>
     <p class="text-center text-muted mb-2">Provide the necessary details to set up your clinic profile</p>
     
     @include('partials.form.clinic-create-form')
@@ -74,9 +74,9 @@
         validateField('#city', 'City is required.', !city);
 
         if (!phoneNumber || !phoneNumber.match(phoneRegex)) {
-             validateField('#phone_number', 'Enter a valid phone number (e.g., 01xxxxxxxxx).', true);
+            validateField('#phone_number', 'Enter a valid phone number (e.g., 01xxxxxxxxx).', true);
         } else {
-             form.find('#phone_number').addClass('is-valid').removeClass('is-invalid');
+            form.find('#phone_number').addClass('is-valid').removeClass('is-invalid');
         }
 
         if (!floor || isNaN(floor) || parseInt(floor) <= 0) {

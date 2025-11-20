@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Appointmenment Schedule
         Route::get   ('/appointment-schedule',           [DoctorAppointmentScheduleController::class, 'index'])  ->name('doctor.appointment-schedule.index');
+        Route::get   ('/appointment-schedule/create',    [DoctorAppointmentScheduleController::class, 'create']) ->name('doctor.appointment-schedule.create');
         Route::post  ('/appointment-schedule',           [DoctorAppointmentScheduleController::class, 'store'])  ->name('doctor.appointment-schedule.store');
         Route::get   ('/appointment-schedule/{id}',      [DoctorAppointmentScheduleController::class, 'show'])   ->name('doctor.appointment-schedule.show');
         Route::get   ('/appointment-schedule/{id}/edit', [DoctorAppointmentScheduleController::class, 'edit'])   ->name('doctor.appointment-schedule.edit');

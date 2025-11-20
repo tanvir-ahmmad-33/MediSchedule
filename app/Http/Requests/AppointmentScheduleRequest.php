@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AppointmentScheduleRequest extends FormRequest
@@ -21,49 +23,47 @@ class AppointmentScheduleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $nowTime = Carbon::now()->format('H:i');
+
         return [
-            'clinicName'              => 'required|string|max:255',
-            'clinicAddress'           => 'required|string|max:255',
-            'clinicCity'              => 'required|string|max:255',
-            'weekDay'                 => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
-            'operationalAvailability' => 'required|in:available,unavailable',
-            'openingTime'             => 'required|date_format:H:i',
-            'closingTime'             => 'required|date_format:H:i',
-            'consultationCapacity'    => 'required|integer|min:1',
+            'clinic_id'        => 'required|exists:clinics,id',
+            'appointment_date' => 'required|date|after_or_equal:today',
+            'opening_time'     =>  [
+                                    'required', 'date_format:H:i',
+                                    Rule::when(request('appointment_date') === Carbon::today()->format('Y-m-d'), 
+                                    ['after_or_equal:'. $nowTime]),
+                                  ],
+            'closing_time'     => 'required|date_format:H:i|after:opening_time',
+            'patient_capacity' => 'required|integer|min:1',
+            'ot_status'        => 'required|boolean'
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
-            'clinicName.required' => 'The clinic name is required.',
-            'clinicName.string' => 'The clinic name must be a valid string.',
-            'clinicName.max' => 'The clinic name may not be greater than 255 characters.',
+            'clinic_id.required'        => 'Please select a healthcare facility.',
+            'clinic_id.exists'          => 'The selected healthcare facility is invalid.',
 
-            'clinicAddress.required' => 'The clinic address is required.',
-            'clinicAddress.string' => 'The clinic address must be a valid string.',
-            'clinicAddress.max' => 'The clinic address may not be greater than 255 characters.',
+            'appointment_date.required' => 'Please select a consultation date.',
+            'appointment_date.date'     => 'Please enter a valid date for the consultation.',
 
-            'clinicCity.required' => 'The clinic city is required.',
-            'clinicCity.string' => 'The clinic city must be a valid string.',
-            'clinicCity.max' => 'The clinic city may not be greater than 255 characters.',
+            'opening_time.required'     => 'Please select a consultation start time.',
+            'opening_time.date_format'  => 'The start time must be in the format HH:mm.',
 
-            'weekday.required' => 'Please select a weekday.',
-            'weekday.in' => 'The weekday must be one of the following: Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday.',
+            'closing_time.required'     => 'Please select a consultation finish time.',
+            'closing_time.date_format'  => 'The finish time must be in the format HH:mm.',
+            'closing_time.after'        => 'The finish time must be after the start time.',
 
-            'operationalAvailability.required' => 'Please specify if the clinic is available.',
-            'operationalAvailability.in' => 'The operational availability must be either "available" or "unavailable".',
+            'patient_capacity.required' => 'Please enter the number of patients allowed.',
+            'patient_capacity.integer'  => 'The patient capacity must be a valid number.',
+            'patient_capacity.min'      => 'The patient capacity must be at least 1.',
 
-            'consultationCapacity.required' => 'The patient capacity is required.',
-            'consultationCapacity.integer' => 'The patient capacity must be an integer.',
-            'consultationCapacity.min' => 'The patient capacity must be at least 1.',
-
-            'openingTime.required' => 'Please provide the opening time.',
-            'openingTime.date_format' => 'The opening time must be in the format HH:MM.',
-
-            'closingTime.required' => 'Please provide the closing time.',
-            'closingTime.date_format' => 'The closing time must be in the format HH:MM.',
+            'ot_status.required'        => 'Please select whether the operation will happen.',
+            'ot_status.boolean'         => 'The operation status must be a true or false value.',
         ];
     }
+
 
     public function getAppointmentSchedule() {
         $data = $this->validated();

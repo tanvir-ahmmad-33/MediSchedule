@@ -52,7 +52,7 @@
 @endsection
 
 @section('body-content')
-<div class="row mb-3">
+<div class="row mb-3 mt-3">
     <div class="col-12 col-md-12 col-lg-6 d-flex justify-content-center gap-2 justify-content-lg-start">
         <form action="" method="GET" id="appt-type-search-form">
             <div class="d-flex flex-row gap-2">
@@ -237,7 +237,7 @@
 
     $(".btn-refresh").on('click', function(e) {
         e.preventDefault();
-
+        $('#search').val('');
         reloadTable();
     });
 
@@ -297,7 +297,18 @@
 
                 $('#createAppointmentType').modal('hide');
 
-                if(response['status']) {
+                if(response.exists) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: response['message'],
+                        timer: 5000,
+                        timerProgressBar: true,
+                        showConfirmButton: true,
+                        confirmButtonText: 'Close',
+                        confirmButtonColor: '#d33',
+                    });
+                }
+                else if(response['status']) {
                     Swal.fire({
                         icon: 'success',
                         text: response['message'],
@@ -310,42 +321,14 @@
                         reloadTable();
                     });
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        text: response['message'],
-                        timer: 5000,
-                        timerProgressBar: true,
-                        showConfirmButton: true,
-                        confirmButtonText: 'Try Again',
-                        confirmButtonColor: '#28a745',
-                    });
+                    handleAjaxResponseError(response.message);
                 }
+
+                const form = $(this);
+                form[0].reset();
             },
             error: function(xhr, status, error) {
-                console.log('Request Failed');
-                console.log('Status: ' + status);
-                console.log('Error: ' + error);
-
-                $('#createAppointmentType').modal('hide');
-        
-                let errorMessage = 'Something went wrong! Please try again.';
-        
-                if (xhr.status === 422) {
-                    errorMessage = 'Validation error: ' + xhr.responseText;
-                } else if (xhr.status === 500) {
-                    errorMessage = 'Server error: ' + xhr.responseText;
-                } else {
-                    errorMessage = 'Error: ' + xhr.statusText;
-                }
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: errorMessage,
-                    timer: 5000,
-                    timerProgressBar: true,
-                    showConfirmButton: true
-                });
+                handleAjaxError(xhr, status, error)
             }
         });
     });

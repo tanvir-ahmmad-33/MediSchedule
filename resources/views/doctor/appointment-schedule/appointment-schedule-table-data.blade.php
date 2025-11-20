@@ -2,15 +2,13 @@
     @foreach($appointmentSchedules as $appointmentSchedule)
         <tr>
             <td>{{ $loop->iteration + $appointmentSchedules->firstItem() - 1 }}</td>
-            <td>{{ $appointmentSchedule->clinic_name }}</td>
-            <td>{{ $appointmentSchedule->clinic_city }}</td>
-            <td>{{ $appointmentSchedule->weekday }}</td>
+            <td>{{ $appointmentSchedule->clinic->name }}</td>
+            <td>{{ $appointmentSchedule->clinic->city }}</td>
+            <td>{{ \Carbon\Carbon::parse($appointmentSchedule->appointment_date)->format('l') }}</td>
             <td>
-                @if( $appointmentSchedule->operational_availability == 'available')
-                    <span class="text-success">Available</span>
-                @else
-                    <span class="text-danger">Unavailable</span>
-                @endif
+                <span class="{{ !$appointmentSchedule->ot_status ? 'text-danger' : 'text-success' }}">
+                    {{ $appointmentSchedule->ot_status ? 'Available' : 'Unavailable'}}
+                </span>
             </td>
             <td>
                 <span class="text-danger">0</span>
@@ -18,20 +16,18 @@
             <td>
                 <button type="button" 
                         class="btn btn-xs btn-info details-btn" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#moreDetailsModal"
                         data-id="{{ $appointmentSchedule->id }}">
                         More Details
                     </button>
             </td>
             <td class="d-flex flex-row gap-1">
-                <button class="btn btn-xs btn-warning d-flex flex-row edit-button"
+                <button class="btn btn-xs btn-warning edit-button"
                         data-id="{{ $appointmentSchedule->id }}">
                     <i class="fa-solid fa-pen-to-square me-1"></i>Edit
                 </button>
-                <button class="btn btn-xs btn-danger d-flex flex-row delete-button"
+                <button class="btn btn-xs btn-danger delete-button"
                         data-id="{{ $appointmentSchedule->id }}"
-                        data-name="{{ $appointmentSchedule->clinic_name }}">
+                        data-name="{{ $appointmentSchedule->clinic->name }}">
                     <i class="fa-solid fa-trash-can me-1"></i>Delete
                 </button>
             </td>
@@ -41,4 +37,4 @@
     <tr>
         <td colspan="9" class="text-center text-small text-danger">No appointment schedule is found.</td>
     </tr>
-@endif
+@endif	
