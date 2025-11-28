@@ -22,12 +22,13 @@ class AppointmentScheduleService {
 
     public function createAppointmentSchedule($data) {
         $createAppointmentScheduleData = [
-            'clinic_id'        => $data['clinic_id'],
-            'appointment_date' => $data['appointment_date'],
-            'opening_time'     => $data['opening_time'],
-            'closing_time'     => $data['closing_time'],
-            'patient_capacity' => $data['patient_capacity'],
-            'ot_status'        => $data['ot_status'],
+            'clinic_id'         => $data['clinic_id'],
+            'appointment_date'  => $data['appointment_date'],
+            'opening_time'      => $data['opening_time'],
+            'closing_time'      => $data['closing_time'],
+            'patient_capacity'  => $data['patient_capacity'],
+            'patient_appointed' => 0,
+            'ot_status'         => $data['ot_status'],
         ];
 
         return AppointmentSchedule::create($createAppointmentScheduleData);
@@ -36,7 +37,7 @@ class AppointmentScheduleService {
     public function updateAppointmentSchedule($data, $id) {
         $schedule = AppointmentSchedule::find($id);
 
-        if($schedule) {
+        if($schedule && $schedule['patient_appointed'] < $data['patient_capacity']) {
             return $schedule->update([
                 'clinic_id'	       => $data['clinic_id'],
                 'appointment_date' => $data['appointment_date'],
@@ -58,5 +59,9 @@ class AppointmentScheduleService {
         }
 
         return false;
+    }
+
+    public function getAppointmentScheduleSelectingClinic($id) {
+        return AppointmentSchedule::where('clinic_id', $id)->where('patient_capacity', '>', 0)->get();
     }
 }

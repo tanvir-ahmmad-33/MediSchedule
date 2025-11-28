@@ -166,6 +166,7 @@ class DoctorAppointmentScheduleController extends Controller
 
         return response()->json($response);
     }
+
     public function destroy($id) {
         $schedule = $this->appointmentScheduleService->deleteAppointmentSchedule($id);
 
@@ -178,6 +179,26 @@ class DoctorAppointmentScheduleController extends Controller
             $response = [
                 'status'  => false,
                 'message' => "Appointment schedule couldn't be deleted."
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+    public function getSchedule($id) {
+        $schedules = $this->appointmentScheduleService->getAppointmentScheduleSelectingClinic($id);
+
+
+        if($schedules) {
+            $response = [
+                'status'    => true,
+                'message'   => 'Appointment schedules fetched successfully.',
+                'schedules' => $schedules
+            ];
+        } else {
+            $response = [
+                'status'  => false,
+                'message' => "Appointment schedules couldn't fetched."
             ];
         }
 

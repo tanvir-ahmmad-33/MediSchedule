@@ -3,7 +3,7 @@
         <tr>
             <td>{{ $loop->iteration + $appointmentSchedules->firstItem() - 1 }}</td>
             <td>{{ $appointmentSchedule->clinic->name }}</td>
-            <td>{{ $appointmentSchedule->clinic->city }}</td>
+            <td>{{ \Carbon\Carbon::parse($appointmentSchedule->appointment_date)->format('d M, Y') }}</td>
             <td>{{ \Carbon\Carbon::parse($appointmentSchedule->appointment_date)->format('l') }}</td>
             <td>
                 <span class="{{ !$appointmentSchedule->ot_status ? 'text-danger' : 'text-success' }}">
@@ -11,7 +11,11 @@
                 </span>
             </td>
             <td>
-                <span class="text-danger">0</span>
+                @if($appointmentSchedule->patient_appointed > 0)
+                    <span class="text-success"> {{ $appointmentSchedule->patient_appointed }} </span>
+                @else
+                    <span class="text-danger"> {{ $appointmentSchedule->patient_appointed }} </span>
+                @endif
             </td>
             <td>
                 <button type="button" 

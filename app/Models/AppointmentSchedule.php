@@ -16,11 +16,16 @@ class AppointmentSchedule extends Model
         'opening_time',
         'closing_time',
         'patient_capacity',
+        'patient_appointed',
         'ot_status'
     ];
 
     public function clinic() {
         return $this->belongsTo(Clinic::class);
+    }
+
+    public function appointments() {
+        return $this->hasMany(Appointment::class, 'appointment_schedules_id');
     }
 
     public function scopeWhereTimeOverlap($query, $date, $startTime, $endTime) {

@@ -79,3 +79,27 @@ function logFormData(formData) {
         console.log(key, " = ", value);
     }
 }
+
+// Function to convert time from 24-hour format to 12-hour format with AM/PM
+function convertTwelveFormat(time) {
+    let [hours, minutes, seconds] = time.split(":");
+
+    hours = parseInt(hours, 10);
+
+    if (hours === 0) {
+        return `12:${minutes.padStart(2, "0")} AM`;
+    } else if (hours === 12) {
+        return `12:${minutes.padStart(2, "0")} PM`;
+    } else if (hours < 12) {
+        return `${hours.toString().padStart(2, "0")}:${minutes.padStart(
+            2,
+            "0"
+        )} AM`;
+    } else {
+        hours -= 12;
+        return `${hours.toString().padStart(2, "0")}:${minutes.padStart(
+            2,
+            "0"
+        )} PM`;
+    }
+}

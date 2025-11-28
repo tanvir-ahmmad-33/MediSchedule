@@ -34,7 +34,7 @@
     }
 
     #pagination-section {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
     #pagination-section .pagination {
@@ -60,7 +60,7 @@
 @endsection
 
 @section('body-content')
-<div class="row mt-4">
+<div class="row mt-3">
     <div class="col-12 col-lg-6 d-flex justify-content-center gap-2 justify-content-lg-start">
         <form action="" method="GET" id="appointment-search-form">
             <div class="d-flex flex-row gap-2">
@@ -90,18 +90,15 @@
                 <th scope="col" class="text-center">Address</th>
                 <th scope="col" class="text-center">Appointment Type</th>
                 <th scope="col" class="text-center">Status</th>
-                <th scope="col" class="text-center">Appointment Details</th>
             </tr>
         </thead>
         <tbody>
-            @include('doctor.appointment.data.index-appointment-data')
+            @include('doctor.appointment.data.pending-appointment-data')
         </tbody>
     </table>
 </div>
-<div id="pagination-section">
-    <div class="pagination-container">
-        {{ $appointments->links('pagination::bootstrap-5') }}
-    </div>
+<div>
+    {{ $appointments->links('pagination::bootstrap-5') }}
 </div>
 
 @include('doctor.appointment.modal.details')
@@ -199,68 +196,6 @@
                 handleAjaxError(xhr, status, error);
             }
         })
-    });
-
-    $(document).on('submit', '#appointment-search-form', function(e) {
-        e.preventDefault();
-
-        const search = $("#appointment-search-form #search").val();
-
-        if(!search) {
-            Swal.fire({
-                icon: 'error',
-                text: 'Please fill in both the search value',
-                timer: 5000,
-                timerProgressBar: true,
-                showConfirmButton: true,
-                confirmButtonText: "Close",
-                confirmButtonColor: "#28a745",
-            });
-            return;
-        }
-        
-
-        $.ajax({
-            url: "{{ route('doctor.appointment.index') }}",
-            type: "GET",
-            data: {
-                search: search
-            },
-
-            success: function(response) {
-                console.log(response);
-                
-                $('#appointment-table tbody').html(response.htmlContent);
-                $('#pagination-section .pagination-container').html(response.pagination);
-            },
-
-            error: function(xhr, status, error) {
-                handleAjaxError(xhr, status, error);
-            }
-        });
-    });
-
-    $(document).on('click', '.btn-refresh', function(e) {
-        $('#search').val('');
-
-        $.ajax({
-            url: "{{ route('doctor.appointment.index') }}",
-            type: "GET",
-            data: {
-                'search': ''
-            },
-
-            success: function(response) {
-                console.log(response);
-
-                $('#appointment-table tbody').html(response.htmlContent);
-                $('#pagination-section .pagination-container').html(response.pagination);
-            },
-
-            error(xhr, status, error) {
-                handleAjaxError(xhr, status, error);
-            }
-        });
     });
 </script>
 @endpush

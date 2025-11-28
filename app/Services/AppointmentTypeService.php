@@ -4,6 +4,10 @@ namespace App\Services;
 use App\Models\AppointmentType;
 
 class AppointmentTypeService {
+    public function getAppointmentTypes() {
+        return AppointmentType::get();
+    }
+    
     public function getAllAppointmentType($search, $perPage) {
         return AppointmentType::search($search)->paginate($perPage);
     }

@@ -100,7 +100,7 @@
                 <th scope="col" class="text-center">Operational Availability</th>
                 <th scope="col" class="text-center">Patient Appoinments</th>
                 <th scope="col" class="text-center">More Details</th>
-                <th scope="col" class="text-center">Manage</th>
+                <th scope="col" class="text-center">Appointment Details</th>
             </tr>
         </thead>
         <tbody class="text-center">
@@ -147,6 +147,7 @@
                     $("#detailsModal .schedule-details-schedule-end-time").text(response.appointmentSchedule.closing_time);
 
                     $("#detailsModal .schedule-details-patient-capacity").text(response.appointmentSchedule.patient_capacity);
+                    $("#detailsModal .schedule-details-patient-appoints").text(response.appointmentSchedule.patient_capacity);
 
                     const otStatus = response.appointmentSchedule.ot_status;
 

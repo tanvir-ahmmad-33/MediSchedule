@@ -24,6 +24,7 @@
                     </p>
                     <p>
                         <strong>Patient Capacity</strong>: <span class="schedule-details-patient-capacity"></span> <br>
+                        <strong>Patient Consultation Bookings Number</strong>: <span class="schedule-details-patient-appoints"></span> <br>
                         <strong>OT Status</strong>: <span class="schedule-details-ot-status"></span>
                     </p>
                 </div>

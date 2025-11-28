@@ -27,16 +27,13 @@
             </a>
             <ul id="appointments" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Appointment List</a>
+                    <a href="{{ route('doctor.appointment.index') }}" class="sidebar-link">Appointments</a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">New Appointment</a>
+                    <a href="{{ route('doctor.appointment.create') }}" class="sidebar-link">New Appointment</a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Appointments to Confirm</a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Appointments Summary</a>
+                    <a href="{{ route('doctor.appointment.pending') }}" class="sidebar-link">Pending Appointments</a>
                 </li>
             </ul>
         </li>
@@ -79,6 +76,38 @@
                     <a href="{{ route('doctor.clinic.create') }}" class="sidebar-link">Add Healthcare Facility</a>
                 </li>
             </ul>
+        </li>
+
+        <!-- Patient -->
+        <li class="sidebar-item">
+            <a href="" class="sidebar-link">
+                <i class="fa-solid fa-user-injured"></i>
+                <span>Patient Profiles</span>
+            </a>
+        </li>
+
+        <!-- Staff Profiles -->
+        <li class="sidebar-item">
+            <a href="" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#staffs" aria-expanded="false" aria-controls="staffs">
+                <i class="fa-solid fa-user-nurse"></i>
+                <span>Staff Profiles</span>
+            </a>
+            <ul id="staffs" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">Staffs</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">Add New Staff</a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Health Camp -->
+        <li class="sidebar-item">
+            <a href="" class="sidebar-link">
+                <i class="fa-solid fa-clinic-medical"></i>
+                <span>Free Health Camp</span>
+            </a>
         </li>
     </ul>
 
