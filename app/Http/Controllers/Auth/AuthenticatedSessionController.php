@@ -33,11 +33,11 @@ class AuthenticatedSessionController extends Controller
 
         switch ($user->role) {
             case 'doctor':
-                return redirect()->route('doctor.dashboard');
+                return redirect()->route('doctor.dashboard')->with('success', $user->name);
             case 'staff':
-                return redirect()->route('staff.dashboard');
+                return redirect()->route('staff.dashboard')->with('success', $user->name);
             case 'patient':
-                return redirect()->route('patient.dashboard');
+                return redirect()->route('patient.dashboard')->with('success', $user->name);
             default:
                 return redirect()->route('home');
         }

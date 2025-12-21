@@ -103,3 +103,10 @@ function convertTwelveFormat(time) {
         )} PM`;
     }
 }
+
+// Function to capitalize the first letter of each word in a string
+function capitalizeFirstLetter(str) {
+    return str.replace(/\b\w/g, function (char) {
+        return char.toUpperCase();
+    });
+}

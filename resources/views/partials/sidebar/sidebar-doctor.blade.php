@@ -14,7 +14,7 @@
         <!-- Home -->
         <li class="sidebar-item">
             <a href="{{ route('doctor.dashboard') }}" class="sidebar-link">
-                <i class="fa-solid fa-igloo"></i>
+                <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </a>
         </li>
@@ -30,7 +30,10 @@
                     <a href="{{ route('doctor.appointment.index') }}" class="sidebar-link">Appointments</a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('doctor.appointment.create') }}" class="sidebar-link">New Appointment</a>
+                    <a href="{{ route('doctor.appointment.create') }}" class="sidebar-link">New Patient Appointment</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('doctor.appointment.existed') }}" class="sidebar-link">Past Patient Appointment</a>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('doctor.appointment.pending') }}" class="sidebar-link">Pending Appointments</a>
@@ -80,7 +83,7 @@
 
         <!-- Patient -->
         <li class="sidebar-item">
-            <a href="" class="sidebar-link">
+            <a href="{{ route('doctor.patient.index') }}" class="sidebar-link">
                 <i class="fa-solid fa-user-injured"></i>
                 <span>Patient Profiles</span>
             </a>
@@ -94,10 +97,13 @@
             </a>
             <ul id="staffs" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Staffs</a>
+                    <a href="{{ route('doctor.staff.index') }}" class="sidebar-link">Staffs</a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Add New Staff</a>
+                    <a href="{{ route('doctor.staff.create') }}" class="sidebar-link">Add New Staff</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('doctor.staff.pending') }}" class="sidebar-link">Pending Approvals</a>
                 </li>
             </ul>
         </li>

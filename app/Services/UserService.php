@@ -22,4 +22,43 @@ class UserService {
 
         return User::create($userCreateData);
     }
+
+    public function getStaffById($id) {
+        return User::find($id);
+    }
+
+    public function pendingStaffNumber() {
+        return User::where('role', 'staff')
+                ->where('admin_verified', 0)
+                ->count();
+    }
+
+    public function getAllPendingStaff() {
+        return User::where('admin_verified', 0)
+               ->where('role', 'staff')
+               ->get();
+    }
+
+    public function deleteUser($id) {
+        $user = User::find($id);
+
+        if($user) {
+            $user->delete();
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getAllPaginatedPatient($perPage) {
+        return User::where('role', 'patient')->paginate($perPage);
+    }
+
+    public function getUserById($id) {
+        return User::find($id);
+    }
+
+    public function getAllUser() {
+        return User::all();
+    }
 }

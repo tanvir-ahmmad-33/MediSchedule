@@ -185,6 +185,16 @@
                     $("#detailsModal .patient-email").text(response.appointment.user.email);
                     $("#detailsModal .patient-address").text(response.appointment.address + ', ' + response.appointment.city);
 
+                    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    const weekdays = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    const date = new Date(response.appointment.appointment_schedule.appointment_date);
+                    const day = date.getDate();
+                    const month = months[date.getMonth()];
+                    const year = date.getFullYear();
+                    const dateString = `${day} ${month}, ${year}`;
+
+                    $("#detailsModal .consultation-date").text(dateString);
+                    $("#detailsModal .consultation-date-week").text(weekdays[date.getDay()]);
                     $("#detailsModal .consultation-type").text(response.appointment.appointment_type.appt_type_name + ' (' + response.appointment.appointment_type.appt_type_code +')');
                     $("#detailsModal .appointed-time").text(convertTwelveFormat(response.appointment.appointment_schedule.opening_time) + ' - ' + convertTwelveFormat(response.appointment.appointment_schedule.closing_time));
                     $("#detailsModal .consultation-place-name").text(response.appointment.clinic.name);
@@ -209,7 +219,7 @@
         if(!search) {
             Swal.fire({
                 icon: 'error',
-                text: 'Please fill in both the search value',
+                text: 'Please fill in the search value',
                 timer: 5000,
                 timerProgressBar: true,
                 showConfirmButton: true,

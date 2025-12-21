@@ -15,6 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('appt_type_code', 10)->unique();
             $table->string('appt_type_name');
+            $table->string('icon');
+            $table->decimal('min_price', 8, 2);
+            $table->decimal('max_price', 8, 2);
+            $table->decimal('discount', 5, 2);
+            $table->text('description')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

@@ -78,6 +78,25 @@ class DoctorAppointmentTypeController extends Controller
         return response()->json($response);
     }
 
+    public function show($id) {
+        $appointmentType = $this->appointmentTypeService->getAppointmentTypeById($id);
+
+        if($appointmentType) {
+            $response = [
+                'status'          => true,
+                'message'         => "Appointment type found successfully.",
+                'appointmentType' => $appointmentType
+            ];
+        } else {
+            $response = [
+                'status'  => false,
+                'message' => "Appointment type not found."
+            ];
+        }
+
+        return response()->json($response);
+    }
+
     public function edit($id) {
         $appointmentType = $this->appointmentTypeService->getAppointmentTypeById($id);
 
@@ -129,6 +148,29 @@ class DoctorAppointmentTypeController extends Controller
             $response = [
                 'status'  => false,
                 'message' => 'Failed to delete appointment type. Please try again.'
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+    public function updateStatus(Request $request, $id) {
+        $status = $request->input('status');
+
+        $status = ($status == 'active') ? 'inactive' : 'active';
+
+        $appointmentType = $this->appointmentTypeService->updateAppointmentTypeStatus($status, $id);
+
+        if($appointmentType) {
+            $response = [
+                'status'          => true,
+                'message'         => "Appointment type status updated successfully.",
+                'appointmentType' => $appointmentType
+            ];
+        } else {
+            $response = [
+                'status'  => false,
+                'message' => "Appointment type status isn't updated."
             ];
         }
 

@@ -28,6 +28,12 @@ body {
     height: 100vh;
 }
 
+.btn-xs {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
 /* ********************** navbar section ********************** */
 .navbar {
     background: rgba(255, 255, 255, 0.9);
@@ -194,7 +200,9 @@ body {
 }
 
 /* ********************* services section ********************* */
-
+#services {
+    min-height: 100vh;
+}
 #services .services-details {
     line-height: 1.2;
     margin-bottom: 30px;
@@ -203,13 +211,14 @@ body {
 #services .cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
     justify-content: center;
 }
 
 #services .card {
     width: 300px;
-    background: var(--white);
+    height: 240px;
+    background: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
@@ -217,31 +226,54 @@ body {
     cursor: pointer;
 }
 
-#services .card:hover {
-    background: var(--medium-jungle-green);
-    color: var(--white);
-    transform: translateY(-5px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
-}
-
-#services .card .card-body {
+#services .card-body {
     display: flex;
     flex-direction: column;
 }
 
-#services .card .card-body i {
-    color: var(--keppel);
-    margin-bottom: 5px;
-    transition: color 0.3s ease;
+#services .card .card-icon {
+    font-size: 24px;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+    margin: 10px 0px 3px 0px;
 }
 
-#services .card .card-body h5 {
-    margin-top: auto;
+#services .card .card-title {
+    font-size: 1.1rem;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
 }
 
-#services .card .card-body p {
-    font-size: 0.8rem;
+#services .card .card-details {
+    background: linear-gradient(145deg, #1b3d32, #48a36c);
+    padding: 10px;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+#services .card .card-details p {
+    color: #e1e8eb;
+    font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#services .card .card-details.expanded p {
+    -webkit-line-clamp: unset;
+    display: block;
+    max-height: none;
+}
+
+#services .card .card-details .btn {
     margin-top: auto;
+    align-self: flex-end;
+}
+
+#services .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
 #services .card .card-body .btn {

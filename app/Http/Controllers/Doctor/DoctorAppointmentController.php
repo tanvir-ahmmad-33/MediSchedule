@@ -122,6 +122,25 @@ class DoctorAppointmentController extends Controller
         }
     }
 
+    public function patientDetails($id) {
+        $patient = $this->userService->getUserById($id);
+
+        if($patient) {
+            $response = [
+                'status'  => true,
+                'message' => "User data successfully fetched",
+                'patient' => $patient
+            ];
+        } else {
+            $response = [
+                'status'  => false,
+                'message' => "User data doesn't found"
+            ];
+        }
+
+        return response()->json($response);
+    }
+
     public function updateStatus(Request $request, $id) {
         $status = $this->appointmentService->changeAppointmentStatus($request->status, $id);
 
@@ -155,15 +174,48 @@ class DoctorAppointmentController extends Controller
         }
     }
 
-    public function pending() {
-        $doctor = $this->doctorInfo();
-        $appointments = $this->appointmentService->getPendingAppointments(10);
+    public function pending(Request $request) {
+        $search = $request->input('search');
 
+        if($search) {
+            $appointments = $this->appointmentService->getPendingAppointments($search, 10);
+        } else {
+            $appointments = $this->appointmentService->getPendingAppointments('', 10);
+        }
+
+        $doctor = $this->doctorInfo();
+        
+        if($request->ajax()) {
+            return response()->json([
+                'htmlContent' => view('doctor.appointment.data.pending-appointment-data', compact('appointments'))->render(),
+                'pagination'  => $appointments->appends(['search' => $search])->links('pagination::bootstrap-5')->render()
+            ]);
+        }
 
         return view('doctor.appointment.pending', [
             'title'        => 'Doctor | Pending Appointments',
             'doctor'       => $doctor,
             'appointments' => $appointments
         ]);
+    }
+
+    public function existed() {
+        $doctor = $this->doctorInfo();
+        $users  = $this->userService->getAllUser();
+        $clinics = $this->clinicService->getAllClinic();
+        $appointmentTypes = $this->appointmentTypeService->getAppointmentTypes();
+        
+
+        return view('doctor.appointment.exists', [
+            'title'            => 'Doctor | Create Past Patient Appointments',
+            'doctor'           => $doctor,
+            'users'            => $users,
+            'clinics'          => $clinics,
+            'appointmentTypes' => $appointmentTypes
+        ]);
+    }
+
+    public function existedStore($id) {
+        
     }
 }

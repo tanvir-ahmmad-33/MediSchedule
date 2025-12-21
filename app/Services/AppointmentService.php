@@ -63,7 +63,11 @@ class AppointmentService {
         return Appointment::with(['user', 'appointmentType', 'clinic', 'appointmentSchedule'])->find($id);
     }
 
-    public function getPendingAppointments($perPage) {
-        return Appointment::where('status', 'pending')->paginate($perPage);
+    public function getPendingAppointments($search, $perPage) {
+        return Appointment::search($search)->where('status', 'pending')->paginate($perPage);
+    }
+
+    public function getAllAppointmentById($id) {
+        return Appointment::where('user_id', $id)->orderBy('created_at', 'asc')->get();
     }
 }

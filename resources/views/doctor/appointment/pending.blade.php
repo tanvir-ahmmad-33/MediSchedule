@@ -15,7 +15,7 @@
         --rusty-red: #dc3545;
     }
 
-    #appointment-table tbody tr td {
+    #pending-appointment-table tbody tr td {
         font-size: 0.9rem;
     }
 
@@ -62,7 +62,7 @@
 @section('body-content')
 <div class="row mt-3">
     <div class="col-12 col-lg-6 d-flex justify-content-center gap-2 justify-content-lg-start">
-        <form action="" method="GET" id="appointment-search-form">
+        <form action="" method="GET" id="pending-appointment-search-form">
             <div class="d-flex flex-row gap-2">
                 <div class="input-group ">
                     <span class="input-group-text border border-secondary-emphasis"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -81,15 +81,16 @@
 </div>
 
 <div class="table-responsive mt-2 border border-1 rounded">
-    <table class="table table-striped m-0" id="appointment-table">
+    <table class="table table-striped m-0" id="pending-appointment-table">
         <thead>
             <tr>
                 <th scope="col" class="text-center">Sl. No.</th>
                 <th scope="col" class="text-center">Patient Name</th>
                 <th scope="col" class="text-center">Age</th>
-                <th scope="col" class="text-center">Address</th>
-                <th scope="col" class="text-center">Appointment Type</th>
+                <th scope="col" class="text-center">Gender</th>
+                <th scope="col" class="text-center">Schedule</th>
                 <th scope="col" class="text-center">Status</th>
+                <th scope="col" class="text-center">Appointment Details</th>
             </tr>
         </thead>
         <tbody>
@@ -97,8 +98,10 @@
         </tbody>
     </table>
 </div>
-<div>
-    {{ $appointments->links('pagination::bootstrap-5') }}
+<div id="pagination-section">
+    <div class="pagination-container">
+        {{ $appointments->links('pagination::bootstrap-5') }}
+    </div>
 </div>
 
 @include('doctor.appointment.modal.details')
@@ -182,6 +185,16 @@
                     $("#detailsModal .patient-email").text(response.appointment.user.email);
                     $("#detailsModal .patient-address").text(response.appointment.address + ', ' + response.appointment.city);
 
+                    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    const weekdays = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    const date = new Date(response.appointment.appointment_schedule.appointment_date);
+                    const day = date.getDate();
+                    const month = months[date.getMonth()];
+                    const year = date.getFullYear();
+                    const dateString = `${day} ${month}, ${year}`;
+
+                    $("#detailsModal .consultation-date").text(dateString);
+                    $("#detailsModal .consultation-date-week").text(weekdays[date.getDay()]);
                     $("#detailsModal .consultation-type").text(response.appointment.appointment_type.appt_type_name + ' (' + response.appointment.appointment_type.appt_type_code +')');
                     $("#detailsModal .appointed-time").text(convertTwelveFormat(response.appointment.appointment_schedule.opening_time) + ' - ' + convertTwelveFormat(response.appointment.appointment_schedule.closing_time));
                     $("#detailsModal .consultation-place-name").text(response.appointment.clinic.name);
@@ -196,6 +209,68 @@
                 handleAjaxError(xhr, status, error);
             }
         })
+    });
+
+    $(document).on('submit', '#pending-appointment-search-form', function(e) {
+        e.preventDefault();
+
+        const search = $("#pending-appointment-search-form #search").val();
+
+        if(!search) {
+            Swal.fire({
+                icon: 'error',
+                text: 'Please fill in the search value',
+                timer: 5000,
+                timerProgressBar: true,
+                showConfirmButton: true,
+                confirmButtonText: "Close",
+                confirmButtonColor: "#28a745",
+            });
+            return;
+        }
+        console.log(search);
+        
+        $.ajax({
+            url: "{{ route('doctor.appointment.pending') }}",
+            type: "GET",
+            data: {
+                search: search
+            },
+
+            success: function(response) {
+                console.log(response);
+                
+                $('#pending-appointment-table tbody').html(response.htmlContent);
+                $('#pagination-section .pagination-container').html(response.pagination);
+            },
+
+            error: function(xhr, status, error) {
+                handleAjaxError(xhr, status, error);
+            }
+        });
+    });
+
+    $(document).on('click', '.btn-refresh', function(e) {
+        $('#search').val('');
+
+        $.ajax({
+            url: "{{ route('doctor.appointment.pending') }}",
+            type: "GET",
+            data: {
+                'search': ''
+            },
+
+            success: function(response) {
+                console.log(response);
+
+                $('#pending-appointment-table tbody').html(response.htmlContent);
+                $('#pagination-section .pagination-container').html(response.pagination);
+            },
+
+            error(xhr, status, error) {
+                handleAjaxError(xhr, status, error);
+            }
+        });
     });
 </script>
 @endpush

@@ -17,6 +17,8 @@
             </p>
             <p>
                 <strong>Appointed Time: </strong><span class="appointed-time"></span> <br>
+                <strong>Day of the week: </strong><span class="consultation-date-week"></span> <br>
+                <strong>Consultation Date: </strong><span class="consultation-date"></span> <br>
                 <strong>Consultation Type: </strong><span class="consultation-type"></span> <br>
             </p>
             <p>

@@ -5,10 +5,13 @@ use App\Http\Controllers\Doctor\DoctorAppointmentScheduleController;
 use App\Http\Controllers\Doctor\DoctorAppointmentTypeController;
 use App\Http\Controllers\Doctor\DoctorClinicController;
 use App\Http\Controllers\Doctor\DoctorDashboardController;
+use App\Http\Controllers\Doctor\DoctorPatientController;
+use App\Http\Controllers\Doctor\DoctorStaffController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Patient\PatientDashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Staff\StaffDashboardController;
+use App\Http\Controllers\Staff\StaffProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,11 +37,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DoctorDashboardController::class, 'index'])->name('doctor.dashboard');
 
         // Appointment Type
-        Route::get   ('/appointment-type',           [DoctorAppointmentTypeController::class, 'index'])  ->name('doctor.appointment-type.index');
-        Route::post  ('/appointment-type',           [DoctorAppointmentTypeController::class, 'store'])  ->name('doctor.appointment-type.store');
-        Route::get   ('/appointment-type/{id}/edit', [DoctorAppointmentTypeController::class, 'edit'])   ->name('doctor.appointment-type.edit');
-        Route::put   ('/appointment-type/{id}',      [DoctorAppointmentTypeController::class, 'update']) ->name('doctor.appointment-type.update');
-        Route::delete('/appointment-type/{id}',      [DoctorAppointmentTypeController::class, 'destroy'])->name('doctor.appointment-type.destroy');
+        Route::get   ('/appointment-type',             [DoctorAppointmentTypeController::class, 'index'])  ->name('doctor.appointment-type.index');
+        Route::post  ('/appointment-type',             [DoctorAppointmentTypeController::class, 'store'])  ->name('doctor.appointment-type.store');
+        Route::get   ('/appointment-type/{id}',        [DoctorAppointmentTypeController::class, 'show'])   ->name('doctor.appointment-type.show');
+        Route::get   ('/appointment-type/{id}/edit',   [DoctorAppointmentTypeController::class, 'edit'])   ->name('doctor.appointment-type.edit');
+        Route::put   ('/appointment-type/{id}',        [DoctorAppointmentTypeController::class, 'update']) ->name('doctor.appointment-type.update');
+        Route::delete('/appointment-type/{id}',        [DoctorAppointmentTypeController::class, 'destroy'])->name('doctor.appointment-type.destroy');
+        Route::put   ('/appointment-type/{id}/status', [DoctorAppointmentTypeController::class, 'updateStatus'])->name('doctor.appointment-type.updateStatus');
 
         // Clinic
         Route::get   ('/clinic',           [DoctorClinicController::class, 'index'])        ->name('doctor.clinic.index');
@@ -58,21 +63,42 @@ Route::middleware(['auth'])->group(function () {
         Route::get   ('/appointment-schedule/{id}/edit', [DoctorAppointmentScheduleController::class, 'edit'])       ->name('doctor.appointment-schedule.edit');
         Route::put   ('/appointment-schedule/{id}',      [DoctorAppointmentScheduleController::class, 'update'])     ->name('doctor.appointment-schedule.update');
         Route::delete('/appointment-schedule/{id}',      [DoctorAppointmentScheduleController::class, 'destroy'])    ->name('doctor.appointment-schedule.destroy');
-        Route::get   ('/get-schedule/{id}',        [DoctorAppointmentScheduleController::class, 'getSchedule'])->name('doctor.get-clinic-schedule');
+        Route::get   ('/get-schedule/{id}',              [DoctorAppointmentScheduleController::class, 'getSchedule'])->name('doctor.get-clinic-schedule');
 
         // Appointmenment
-        Route::get ('/appointment',             [DoctorAppointmentController::class, 'index'])       ->name('doctor.appointment.index');
-        Route::get ('/appointment/create',      [DoctorAppointmentController::class, 'create'])      ->name('doctor.appointment.create');
-        Route::post('/appointment',             [DoctorAppointmentController::class, 'store'])       ->name('doctor.appointment.store');
-        Route::put ('/appointment/{id}/status', [DoctorAppointmentController::class, 'updateStatus'])->name('doctor.appointment.updateStatus');
-        Route::get ('/appointment/{id}',        [DoctorAppointmentController::class, 'show'])        ->name('doctor.appointment.show');
+        Route::get ('/appointment',              [DoctorAppointmentController::class, 'index'])         ->name('doctor.appointment.index');
+        Route::get ('/appointment/create',       [DoctorAppointmentController::class, 'create'])        ->name('doctor.appointment.create');
+        Route::post('/appointment',              [DoctorAppointmentController::class, 'store'])         ->name('doctor.appointment.store');
+        Route::get ('/appointment/{id}/patient', [DoctorAppointmentController::class, 'patientDetails'])->name('doctor.appointment.patientDetails');
+        Route::put ('/appointment/{id}/status',  [DoctorAppointmentController::class, 'updateStatus'])  ->name('doctor.appointment.updateStatus');
+        Route::get ('/appointment/{id}',         [DoctorAppointmentController::class, 'show'])          ->name('doctor.appointment.show');
+        Route::get ('/appointments/pending',     [DoctorAppointmentController::class, 'pending'])       ->name('doctor.appointment.pending');
+        Route::get ('/appointments/existed',     [DoctorAppointmentController::class, 'existed'])       ->name('doctor.appointment.existed');
+        Route::post('/appointments/{id}',        [DoctorAppointmentController::class, 'existedStore'])  ->name('doctor.appointment.existedStore');
 
-        Route::get ('/appointments/pending', [DoctorAppointmentController::class, 'pending']) ->name('doctor.appointment.pending');
+        // Patient
+        Route::get('/patient',      [DoctorPatientController::class, 'index'])->name('doctor.patient.index');
+        Route::get('/patient/{id}', [DoctorPatientController::class, 'show']) ->name('doctor.patient.show');
+
+        // Staff
+        Route::get   ('/staff',              [DoctorStaffController::class, 'index'])          ->name('doctor.staff.index');
+        Route::get   ('/staff/create',       [DoctorStaffController::class, 'create'])         ->name('doctor.staff.create');
+        Route::post  ('/staff',              [DoctorStaffController::class, 'store'])          ->name('doctor.staff.store');
+        Route::get   ('/staff/pending',      [DoctorStaffController::class, 'pending'])        ->name('doctor.staff.pending');
+        Route::put   ('/staff/{id}/approve', [DoctorStaffController::class, 'approve'])        ->name('doctor.staff.approve');
+        Route::get   ('/staff/{id}/edit',    [DoctorStaffController::class, 'edit'])           ->name('doctor.staff.edit');
+        Route::post  ('/staff/{id}/status',  [DoctorStaffController::class, 'changeStatus'])   ->name('doctor.staff.changeStatus');
+        Route::delete('/staff/{id}',         [DoctorStaffController::class, 'destroy'])        ->name('doctor.staff.destroy');
+        Route::delete('/approval/{id}',      [DoctorStaffController::class, 'approvalDestroy'])->name('doctor.approval.destroy');
+
+        
     });
 
     // Staff routes
     Route::prefix('staff')->middleware('role:staff')->group(function () {
         Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('staff.dashboard');
+
+        Route::get('/profile', [StaffProfileController::class, 'index'])->name('staff.profile.index');
     });
 
     // Patient routes

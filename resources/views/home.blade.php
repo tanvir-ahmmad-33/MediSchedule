@@ -150,33 +150,33 @@
                         <h2 class="about-text-title">Expert Eye Care You Can Trust</h2>
                         <p class="text-muted about-text-details">At our practice, we are dedicated to providing exceptional ophthalmology care tailored to each patient's unique needs. With a focus on advanced treatments, compassionate service, and personalized care, we ensure that your vision health is in expert hands.</p>
 
-                        <div class="about-card shadow-sm rounded p-3 mb-4">
+                        <div class="about-card shadow-sm rounded p-3 mt-3">
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-shield-check fs-2 me-3"></i>
+                                <img src="{{ asset('assets/logo/shield_check_mark_gradient_icon.jpg') }}" style="height:85px; padding: 5px 15px 5px 5px;" class="rounded-pill" alt="">
                                 <div>
-                                    <h5 class="mb-1">Trusted by Thousands</h5>
-                                    <p class="mb-0 text-muted">Our team delivers expert care with proven results and patient satisfaction.</p>
+                                    <h5 class="mb-1" style="font-size: 1.1rem;">Trusted by Thousands</h5>
+                                    <p class="mb-0 text-muted" style="font-size: 0.9rem;">Our team delivers expert care with proven results and patient satisfaction.</p>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="stats p-3 rounded mb-4">
-                            <div class="row">
+                        <div class="stats rounded mt-4 shadow-lg">
+                            <div class="row p-4">
                                 <div class="col-4">
-                                    <div class="stat-item">
-                                        <h5 class="stat-number text-center">15+</h5>
+                                    <div class="stat-item p-1">
+                                        <h4 class="stat-number text-center fw-bold">15+</h4>
                                         <h6 class="stat-text text-center">Years Experience</h6>
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="stat-item">
-                                        <h5 class="stat-number text-center">5000+</h5>
+                                    <div class="stat-item p-1">
+                                        <h4 class="stat-number text-center fw-bold">5000+</h4>
                                         <h6 class="stat-text text-center">Patients Treated</h6>
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="stat-item">
-                                        <h5 class="stat-number text-center">87%</h5>
+                                    <div class="stat-item p-1">
+                                        <h4 class="stat-number text-center fw-bold">87%</h4>
                                         <h6 class="stat-text text-center">Success Rate</h6>
                                     </div>
                                 </div>
@@ -186,7 +186,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 text-center mt-3 mt-lg-4">
+                <div class="col-12 text-center mt-4 mt-lg-5">
                     <a href="#services" class="btn btn-success btn-lg">
                         <i class="fas fa-arrow-right me-2"></i> Explore Our Services
                     </a>
@@ -198,83 +198,42 @@
     <!-- services section -->
     <section id="services" class="services section-padding">
         <div class="container">
-            <h2 class="text-center">Our Eye Care Services</h2>
+            <h2 class="text-center service-title pt-3">Our Specialized Services</h2>
             <p class="text-center text-muted services-details">
-                We care for your eyes with a gentle touch and the latest technology, ensuring every visit is comfortable and reassuring. <br>
-                From check-ups to advanced treatments, your vision is always our top priority.
+                Providing comprehensive eye care with advanced technology and personalized treatment plans for optimal vision health.
             </p>
-            <div class="cards">
+            <div class="cards mt-3">
+                @if($appointmentTypes->isNotEmpty())
+                    @foreach($appointmentTypes as $appointmentType)
+                        <div class="card">
+                            <div class="card-body p-0 text-center">
+                                <div class="card-icon">
+                                    <i class="{{ $appointmentType->icon }}"></i>
+                                </div>
+                                <h5 class="card-title"> 
+                                    {{ $appointmentType->appt_type_name }} 
+                                </h5>
+                                <div class="card-details d-flex flex-column justify-content-between">
+                                    <p> {{ $appointmentType->description }} </p>
+                                    <button class="btn btn-warning btn-sm m-1">More Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
                 <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-eye fa-2x"></i>
-                        <h5 class="text-center">Comprehensive Eye Examination</h5>
-                        <p>Complete eye check-up including refraction, slit-lamp examination, eye pressure measurement, and retina screening to detect eye diseases early.</p>
-                        <button class="btn btn-success btn-sm">More Details</button>
+                    <div class="card-body p-0 text-center">
+                        <div class="card-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h5 class="card-title">No Service Available</h5>
+                        <div class="card-details d-flex flex-column justify-content-between">
+                            <p>We apologize, but the requested service is currently unavailable. Please contact us for more information or assistance.</p>
+                            <a href="#contact" class="btn btn-warning btn-sm m-1">Contact</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-procedures fa-2x"></i>
-                        <h5 class="text-center">Cataract Surgery</h5>
-                        <p>Advanced phacoemulsification with premium intraocular lens (IOL) implantation for clear vision, minimal discomfort, and rapid recovery. Safe, precise, and effective treatment to restore sight.</p>
-                        <button class="btn btn-success btn-sm">More Details</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-stethoscope fa-2x"></i>
-                        <h5 class="text-center">Glaucoma Treatment</h5>
-                        <p>Comprehensive glaucoma management including eye pressure monitoring, visual field testing, optic nerve evaluation, and personalized medical, laser, or surgical treatment to preserve vision.</p>
-                        <button class="btn btn-success btn-sm">More Details</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-lightbulb fa-2x"></i>
-                        <h5 class="text-center">LASIK & Refractive Surgery</h5>
-                        <p>Safe and advanced laser vision correction to reduce or eliminate the need for glasses or contact lenses, offering clear and lasting vision.</p>
-                        <button class="btn btn-success btn-sm">More Details</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-eye fa-2x"></i>
-                        <h5 class="text-center">Comprehensive Eye Examination</h5>
-                        <p>Complete eye check-up including refraction, slit-lamp examination, eye pressure measurement, and retina screening to detect eye diseases early.</p>
-                        <button class="btn btn-success btn-sm">More Details</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-eye fa-2x"></i>
-                        <h5 class="text-center">Comprehensive Eye Examination</h5>
-                        <p>Complete eye check-up including refraction, slit-lamp examination, eye pressure measurement, and retina screening to detect eye diseases early.</p>
-                        <button class="btn btn-success btn-sm">More Details</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-eye fa-2x"></i>
-                        <h5 class="text-center">Comprehensive Eye Examination</h5>
-                        <p>Complete eye check-up including refraction, slit-lamp examination, eye pressure measurement, and retina screening to detect eye diseases early.</p>
-                        <button class="btn btn-success btn-sm">More Details</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-eye fa-2x"></i>
-                        <h5 class="text-center">Comprehensive Eye Examination</h5>
-                        <p>Complete eye check-up including refraction, slit-lamp examination, eye pressure measurement, and retina screening to detect eye diseases early.</p>
-                        <button class="btn btn-success btn-sm">More Details</button>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
